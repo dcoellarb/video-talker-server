@@ -47,7 +47,6 @@ const broadcastEventTypes = {
 io.on('connection', (socket) => {
     socket.emit('connection', null);
     console.log('new user connected')
-    console.log(socket.id)
 
     socket.on('register-new-user', (data) => {
         peers.push({
@@ -55,7 +54,6 @@ io.on('connection', (socket) => {
             socketId: data.socketId
         });
         console.log('registered new user');
-        console.log(peers);
 
         io.sockets.emit('broadcast', {
             event: broadcastEventTypes.ACTIVE_USERS,
@@ -138,7 +136,6 @@ io.on('connection', (socket) => {
             roomId: roomId
         }
         groupCallRooms.push(newGroupCallRoom);
-        console.log(groupCallRooms);
         io.sockets.emit('broadcast', {
             event: broadcastEventTypes.GROUP_CALL_ROOMS,
             groupCallRooms
